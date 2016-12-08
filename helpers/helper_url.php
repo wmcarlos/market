@@ -1,12 +1,11 @@
 <?php
 	require_once("models/model_db.php"); 
  	class helper_url extends model_db{
-
  		public function load(){
- 			$g = $_GET['v'];
- 			if(isset($g) and !empty($g)){
- 				$controller = "controllers/controller_".$g.".php";
- 				$view = "views/view_".$g.".php";
+ 			$v = $_GET['v'];
+ 			if(isset($v) and !empty($v)){
+ 				$controller = "controllers/controller_".$v.".php";
+ 				$view = "views/view_".$v.".php";
  				if(is_file($controller) and is_file($view)){
  					include($controller);
  					include($view);
