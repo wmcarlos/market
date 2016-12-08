@@ -1,6 +1,6 @@
-create database 'market';
+create database market;
 
-use database 'market';
+use market;
 
 create table mk_list(
 	list_id int auto_increment not null,
@@ -28,7 +28,7 @@ create table mk_value(
 	isactive char(1) not null default 'Y',
 	constraint pk_value_id primary key (value_id),
 	constraint fk_list_id0 foreign key (list_id) references mk_list (list_id) on update cascade on delete restrict,
-	constraint fk_value_id foreign key (value_parent_id) references mk_value (value_id) on update cascade on delete restict
+	constraint fk_value_id foreign key (value_parent_id) references mk_value (value_id) on update cascade on delete restrict
 )engine = InnoDB;
 
 create table mk_module(
@@ -86,7 +86,7 @@ create table mk_access(
 	isactive char(1) not null default 'Y',
 	constraint pk_access_id primary key (access_id),
 	constraint fk_service_id foreign key (service_id) references mk_service (service_id) on update cascade on delete restrict,
-	constraint fk_role_id01 foreign key (role_id) references mk_value (value_id) on update cascade on delete restirct
+	constraint fk_role_id01 foreign key (role_id) references mk_value (value_id) on update cascade on delete restrict
 )engine = InnoDB;
 
 create table mk_market(
@@ -105,7 +105,7 @@ create table mk_market(
 	logo varchar(100) not null default 'logo_blank.jpg',
 	tags varchar(250) null,
 	horary_range varchar(100) not null,
-	reputation number not null default 0,
+	reputation decimal not null default 0.0,
 	visits int not null default 0,
 	isactive char(1) not null default 'Y',
 	constraint pk_market_id primary key (market_id),
@@ -113,7 +113,7 @@ create table mk_market(
 	constraint fk_user_id foreign key (user_id) references mk_user (user_id) on update cascade on delete restrict
 )engine = InnoDB;
 
-create table mk_pubication(
+create table mk_publication(
 	publication_id int auto_increment not null,
 	market_id int not null,
 	created timestamp not null default current_timestamp,
@@ -147,19 +147,19 @@ create table mk_social(
 	url text,
 	isactive char(1) not null default 'Y',
 	constraint pk_social_id primary key (social_id),
-	constraint fk_market_id foreign key (market_id) references mk_market (market_id) on update cascade on delete restrict
+	constraint fk_market_id001 foreign key (market_id) references mk_market (market_id) on update cascade on delete restrict
 )engine = InnoDB;
 
 create table mk_follower(
 	follower_id int auto_increment not null,
-	user_id int not null.
+	user_id int not null,
 	market_id int not null,
 	created timestamp not null default current_timestamp,
 	updated timestamp null,
 	isactive char(1) not null default 'Y',
-	constraint pk_follower_id primary key (followe_id),
+	constraint pk_follower_id primary key (follower_id),
 	constraint fk_user_id02 foreign key (user_id) references mk_user (user_id) on update cascade on delete restrict,
-	constraint fk_market_id01 foreign key (market_id) references mk_market (market_id) on update cascade on delete restrict
+	constraint fk_market_id0001 foreign key (market_id) references mk_market (market_id) on update cascade on delete restrict
 )engine = InnoDB;
 
 create table mk_notification(
@@ -183,7 +183,7 @@ create table mk_media(
 	name varchar(30) not null,
 	description varchar(250) null,
 	url varchar(100) not null,
-	size number not null,
+	size decimal not null,
 	isactive char(1) not null default 'Y',
 	constraint pk_media_id primary key (media_id),
 	constraint fk_user_id04 foreign key (user_id) references mk_user (user_id) on update cascade on delete restrict,
@@ -195,7 +195,7 @@ create table mk_media_assigned(
 	media_id int not null,
 	publication_id int not null,
 	created timestamp not null default current_timestamp,
-	constraint pk_media:assigned_id primary key (media_assigned_id),
+	constraint pk_media_assigned_id primary key (media_assigned_id),
 	constraint fk_media_id foreign key (media_id) references mk_media (media_id) on update cascade on delete restrict,
 	constraint fk_publication_id001 foreign key (publication_id) references mk_publication (publication_id) on update cascade on delete restrict
 )engine = InnoDB;
