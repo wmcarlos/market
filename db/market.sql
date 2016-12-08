@@ -199,3 +199,15 @@ create table mk_media_assigned(
 	constraint fk_media_id foreign key (media_id) references mk_media (media_id) on update cascade on delete restrict,
 	constraint fk_publication_id001 foreign key (publication_id) references mk_publication (publication_id) on update cascade on delete restrict
 )engine = InnoDB;
+
+create table mk_bookmark(
+	bookmark_id int auto_increment not null,
+	user_id int not null,
+	publication_id int not null,
+	created timestamp not null default current_timestamp,
+	updated timestamp null,
+	isactive char(1) not null default 'Y',
+	constraint pk_bookmark_id primary key (bookmark_id),
+	constraint fk_user_id05 foreign key (user_id) references mk_user (user_id) on update cascade on delete restrict,
+	constraint fk_publication_id002 foreign key (publication_id) references mk_publication (publication_id) on update cascade on delete restrict
+)engine = InnoDB;
